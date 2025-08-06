@@ -1,49 +1,47 @@
 import React from 'react';
-import { Button } from '@/components/ui/button';
+import { Container, Div, H1, P, Button } from '@/lib/dev-container';
 import { cn } from '@/lib/utils';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface HeroProps {
   mounted?: boolean;
 }
 
-export const LandingHero: React.FC<HeroProps> = ({ mounted = false }) => {
+export const Hero: React.FC<HeroProps> = ({ mounted = false }) => {
   return (
-    <section
-      data-testid="landing-hero"
-      className={cn(
-        'flex flex-col items-center justify-center py-20 px-4 text-center',
-        mounted ? 'animate-fade-in-up' : ''
-      )}
-    >
-      <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-        Empower Your Business with Seamless Solutions
-      </h1>
-      <p className="mt-6 max-w-2xl text-lg text-gray-200">
-        A flexible, scalable platform built to streamline operations, boost productivity,
-        and deliver real‑time insights—all wrapped in a beautiful, intuitive UI.
-      </p>
+    <Container componentId="landing-hero">
+      <Div
+        devId="hero-section"
+        className={cn(
+          'flex flex-col items-center justify-center py-20 px-4 text-center',
+          'bg-cover bg-center bg-no-repeat',
+          'bg-[url(/images/hero-bg.jpg)]'
+        )}
+      >
+        <H1 devId="hero-title" className="text-5xl font-extrabold text-white drop-shadow-lg">
+          Empower Your Business
+        </H1>
+        <P devId="hero-subtitle" className="mt-4 text-xl text-gray-200 max-w-2xl">
+          A single platform to manage clients, appointments, and analytics—all in one place.
+        </P>
 
-      <div className="mt-10 flex gap-4">
-        <Link to="/register">
-          <Button variant="primary" className="px-8 py-3 text-lg">
-            Get Started
-          </Button>
-        </Link>
-        <Link to="/demo">
-          <Button variant="secondary" className="px-8 py-3 text-lg">
-            View Demo
-          </Button>
-        </Link>
-      </div>
-
-      <div className="mt-12 w-full max-w-4xl">
-        <img
-          src="https://source.unsplash.com/featured/1200x600?technology,office"
-          alt="Hero illustration"
-          className="rounded-lg shadow-lg w-full object-cover"
-        />
-      </div>
-    </section>
+        {mounted && (
+          <Link to="/dashboard">
+            <Button
+              devId="hero-cta-button"
+              className="mt-8 bg-purple-600 hover:bg-purple-700 text-white font-medium"
+            >
+              <span className="flex items-center gap-2">
+                Get Started
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Button>
+          </Link>
+        )}
+      </Div>
+    </Container>
   );
 };
+
+export default Hero;
