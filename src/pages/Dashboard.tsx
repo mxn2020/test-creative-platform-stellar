@@ -11,7 +11,6 @@ import { DashboardLoading } from '@/components/dashboard/DashboardLoading';
 import { DashboardUnauthorized } from '@/components/dashboard/DashboardUnauthorized';
 import { ClientsStats } from '@/components/dashboard/ClientsStats';
 import { AppointmentsStats } from '@/components/dashboard/AppointmentsStats';
-
 export const Dashboard: React.FC = () => {
   const {
     session,
@@ -22,17 +21,13 @@ export const Dashboard: React.FC = () => {
     getTimeRemaining,
     getDaysSinceMember,
   } = useDashboard();
-
   if (sessionLoading) {
     return <DashboardLoading />;
   }
-
   if (!session) {
     return <DashboardUnauthorized />;
   }
-
   const user = session.user;
-
   if (!user) {
     return (
       <DashboardUnauthorized
@@ -41,7 +36,6 @@ export const Dashboard: React.FC = () => {
       />
     );
   }
-
   return (
     <Container componentId="dashboard-page">
       <Div devId="dashboard-page-wrapper" className="min-h-screen bg-gray-50">
@@ -77,3 +71,26 @@ export const Dashboard: React.FC = () => {
     </Container>
   );
 };
+---END:src/pages/Dashboard.tsx---
+---FILE:src/components/dashboard/ClientsStats.tsx---
+import React from 'react';
+import { Card } from '@/components/ui/card';
+export const ClientsStats: React.FC = () => (
+  <Card className="p-4">
+    <h3 className="text-lg font-semibold text-gray-900">Clients Overview</h3>
+    <p className="mt-2 text-gray-600">Client statistics will appear here.</p>
+  </Card>
+);
+export default ClientsStats;
+---END:src/components/dashboard/ClientsStats.tsx---
+---FILE:src/components/dashboard/AppointmentsStats.tsx---
+import React from 'react';
+import { Card } from '@/components/ui/card';
+export const AppointmentsStats: React.FC = () => (
+  <Card className="p-4">
+    <h3 className="text-lg font-semibold text-gray-900">Appointments Overview</h3>
+    <p className="mt-2 text-gray-600">Appointment statistics will appear here.</p>
+  </Card>
+);
+export default AppointmentsStats;
+---END:src/components/dashboard/AppointmentsStats.tsx---
