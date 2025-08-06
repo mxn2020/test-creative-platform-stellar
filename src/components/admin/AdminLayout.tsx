@@ -11,6 +11,8 @@ import {
   ChevronLeft,
   Shield,
   Activity,
+  People,
+  Calendar,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { signOut } from '@/lib/auth-client';
@@ -41,6 +43,16 @@ const navItems: NavItem[] = [
     title: 'Settings',
     href: '/admin/settings',
     icon: Settings,
+  },
+  {
+    title: 'Clients',
+    href: '/admin/clients',
+    icon: People,
+  },
+  {
+    title: 'Appointments',
+    href: '/admin/appointments',
+    icon: Calendar,
   },
 ];
 
@@ -73,16 +85,15 @@ export const AdminLayout: React.FC = () => {
             </div>
 
             {/* Navigation */}
-            <Nav 
-              devId="admin-nav" 
-              devName="Admin Navigation" 
+            <Nav
+              devId="admin-nav"
+              devName="Admin Navigation"
               devDescription="Admin sidebar navigation"
               className="flex-1 space-y-1 px-3 py-4"
             >
               {navItems.map((item) => {
                 const isActive = location.pathname === item.href;
                 const Icon = item.icon;
-                
                 return (
                   <Link
                     key={item.href}
@@ -109,9 +120,7 @@ export const AdminLayout: React.FC = () => {
                     {user?.name?.[0]?.toUpperCase() || 'A'}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      {user?.name || 'Admin'}
-                    </p>
+                    <p className="text-sm font-medium text-gray-900">{user?.name || 'Admin'}</p>
                     <p className="text-xs text-gray-500">Administrator</p>
                   </div>
                 </div>
