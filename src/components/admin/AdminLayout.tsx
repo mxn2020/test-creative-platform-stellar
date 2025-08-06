@@ -11,18 +11,16 @@ import {
   ChevronLeft,
   Shield,
   Activity,
-  People,
+  User,
   Calendar,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { signOut } from '@/lib/auth-client';
-
 interface NavItem {
   title: string;
   href: string;
   icon: React.ElementType;
 }
-
 const navItems: NavItem[] = [
   {
     title: 'Overview',
@@ -47,7 +45,7 @@ const navItems: NavItem[] = [
   {
     title: 'Clients',
     href: '/admin/clients',
-    icon: People,
+    icon: User,
   },
   {
     title: 'Appointments',
@@ -55,12 +53,10 @@ const navItems: NavItem[] = [
     icon: Calendar,
   },
 ];
-
 export const AdminLayout: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuth();
-
   const handleLogout = async () => {
     try {
       await signOut();
@@ -69,7 +65,6 @@ export const AdminLayout: React.FC = () => {
       console.error('Logout failed:', error);
     }
   };
-
   return (
     <Container componentId="admin-layout">
       <div className="min-h-screen bg-gray-100">
@@ -83,7 +78,6 @@ export const AdminLayout: React.FC = () => {
                 <span className="text-xl font-bold">Admin Panel</span>
               </div>
             </div>
-
             {/* Navigation */}
             <Nav
               devId="admin-nav"
@@ -111,7 +105,6 @@ export const AdminLayout: React.FC = () => {
                 );
               })}
             </Nav>
-
             {/* User section */}
             <div className="border-t p-4">
               <div className="flex items-center justify-between mb-3">
@@ -148,7 +141,6 @@ export const AdminLayout: React.FC = () => {
             </div>
           </div>
         </div>
-
         {/* Main content */}
         <div className="pl-64">
           {/* Top bar */}
@@ -159,7 +151,6 @@ export const AdminLayout: React.FC = () => {
               <span className="font-medium text-green-600">Online</span>
             </div>
           </div>
-
           {/* Page content */}
           <main className="p-6">
             <Outlet />
