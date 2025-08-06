@@ -1,16 +1,32 @@
+import React from 'react';
+import { Button } from '@/components/ui/button';
+export const CTA: React.FC = () => {
+  return (
+    <section className="bg-purple-600 py-20 text-center">
+      <h2 className="text-3xl font-bold text-white mb-6">
+        Ready to Accelerate Your Growth?
+      </h2>
+      <p className="text-lg text-purple-200 mb-8">
+        Join thousands of businesses that trust our platform.
+      </p>
+      <Button
+        className="bg-white text-purple-600 hover:bg-gray-100 font-semibold"
+      >
+        Start Your Free Trial
+      </Button>
+    </section>
+  );
+};
+export default CTA;
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-
 interface FAQItem {
   question: string;
   answer: string;
 }
-
 export const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   const faqList: FAQItem[] = [
     {
       question: 'What is the pricing model?',
@@ -28,11 +44,9 @@ export const FAQ: React.FC = () => {
         'A 14‑day free trial is available with no credit card required. You can upgrade anytime.',
     },
   ];
-
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-
   return (
     <section className="bg-gray-50 py-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,7 +57,6 @@ export const FAQ: React.FC = () => {
           {faqList.map((item, idx) => (
             <Card
               key={idx}
-              devId={`faq-item-${idx}`}
               className="p-4 cursor-pointer"
               onClick={() => toggle(idx)}
             >
@@ -65,5 +78,4 @@ export const FAQ: React.FC = () => {
     </section>
   );
 };
-
 export default FAQ;
