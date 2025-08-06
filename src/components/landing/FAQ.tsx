@@ -1,58 +1,65 @@
-import React from 'react';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionContent,
-} from '@/components/ui/accordion';
+import React, { useState } from 'react';
+import { Container, Div, H1, P, Button } from '@/lib/dev-container';
 import { cn } from '@/lib/utils';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const faqData = [
+const faqItems = [
   {
-    question: 'What is the pricing model?',
+    question: 'What is the platform built on?',
     answer:
-      'We offer a flexible subscription model with monthly and annual plans. No hidden fees and a free trial for new users.',
+      'Our platform is built with a modern stack: React, TypeScript, Tailwind CSS, and Prisma for data management.',
   },
   {
-    question: 'Can I integrate with existing tools?',
+    question: 'Can I import existing client data?',
     answer:
-      'Yes. Our platform provides REST APIs, webhooks, and pre‑built connectors for popular services like Slack, Zapier, and GitHub.',
+      'Yes! You can import CSV or JSON files directly from the Settings page to migrate your data.',
   },
   {
-    question: 'Is my data secure?',
+    question: 'Is there a free tier?',
     answer:
-      'All data is encrypted in transit and at rest. We follow industry‑standard security practices and undergo regular audits.',
-  },
-  {
-    question: 'Do you provide onboarding assistance?',
-    answer:
-      'Our onboarding specialists will help you get started with a dedicated setup session, documentation, and 24/7 support.',
+      'We offer a generous free tier that includes unlimited users and basic analytics. Premium features are available on paid plans.',
   },
 ];
 
-export const LandingFAQ: React.FC = () => {
+export const FAQ: React.FC = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <section
-      data-testid="landing-faq"
-      className="py-20 bg-gray-50"
-    >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
+    <Container componentId="landing-faq">
+      <Div devId="faq-section" className="py-20 bg-gray-50">
+        <H1 devId="faq-title" className="text-3xl font-bold text-center text-gray-800">
           Frequently Asked Questions
-        </h2>
-        <Accordion type="single" collapsible className="space-y-4">
-          {faqData.map((item, idx) => (
-            <AccordionItem key={idx} value={`item-${idx}`}>
-              <AccordionHeader className="text-lg font-medium">
-                {item.question}
-              </AccordionHeader>
-              <AccordionContent className="text-gray-600">
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
+        </H1>
+        <Div devId="faq-list" className="mt-12 max-w-2xl mx-auto space-y-4">
+          {faqItems.map((item, idx) => (
+            <Div key={idx} devId={`faq-item-${idx}`} className="border-b pb-4">
+              <Button
+                devId={`faq-question-${idx}`}
+                className="w-full flex justify-between items-center text-left text-gray-900"
+                onClick={() => toggle(idx)}
+              >
+                <P className="font-medium">{item.question}</P>
+                {openIndex === idx ? (
+                  <ChevronUp className="h-5 w-5 text-gray-600" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 text-gray-600" />
+                )}
+              </Button>
+              {openIndex === idx && (
+                <P devId={`faq-answer-${idx}`} className="mt-3 text-gray-600">
+                  {item.answer}
+                </P>
+              )}
+            </Div>
           ))}
-        </Accordion>
-      </div>
-    </section>
+        </Div>
+      </Div>
+    </Container>
   );
 };
+
+export default FAQ;
