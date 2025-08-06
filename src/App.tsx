@@ -1,3 +1,27 @@
+import React from 'react';
+export const ClientsPage: React.FC = () => {
+  return (
+    <section className="p-8">
+      <h1 className="text-2xl font-bold">Clients</h1>
+      <p className="mt-4">This is a placeholder Clients page.</p>
+    </section>
+  );
+};
+export default ClientsPage;
+---END:src/pages/ClientsPage.tsx---
+---FILE:src/pages/AppointmentsPage.tsx---
+import React from 'react';
+export const AppointmentsPage: React.FC = () => {
+  return (
+    <section className="p-8">
+      <h1 className="text-2xl font-bold">Appointments</h1>
+      <p className="mt-4">This is a placeholder Appointments page.</p>
+    </section>
+  );
+};
+export default AppointmentsPage;
+---END:src/pages/AppointmentsPage.tsx---
+---FILE:src/App.tsx---
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Landing } from './pages/Landing';
 import { Login } from './pages/Login';
@@ -21,7 +45,6 @@ import { AdminLayout } from './components/admin/AdminLayout';
 import { DevModeApp, Container } from './lib/dev-container';
 import { componentRegistry } from './registry/componentRegistry';
 import { componentLibrary } from './registry/componentLibrary';
-
 function App() {
   return (
     <DevModeApp system={{ registry: componentRegistry, library: componentLibrary }}>
@@ -99,5 +122,6 @@ function App() {
     </DevModeApp>
   );
 }
-
 export default App;
+---END:src/App.tsx---
+---END---
