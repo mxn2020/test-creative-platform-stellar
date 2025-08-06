@@ -1,46 +1,53 @@
 import React from 'react';
-import { Container, Div, H1, P, Button } from '@/lib/dev-container';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 interface HeroProps {
+  /** Determines if the component should animate after mount */
   mounted?: boolean;
 }
 
 export const Hero: React.FC<HeroProps> = ({ mounted = false }) => {
   return (
-    <Container componentId="landing-hero">
-      <Div
-        devId="hero-section"
-        className={cn(
-          'flex flex-col items-center justify-center py-20 px-4 text-center',
-          'bg-cover bg-center bg-no-repeat',
-          'bg-[url(/images/hero-bg.jpg)]'
-        )}
-      >
-        <H1 devId="hero-title" className="text-5xl font-extrabold text-white drop-shadow-lg">
-          Empower Your Business
-        </H1>
-        <P devId="hero-subtitle" className="mt-4 text-xl text-gray-200 max-w-2xl">
-          A single platform to manage clients, appointments, and analytics—all in one place.
-        </P>
+    <section
+      className={cn(
+        'flex flex-col items-center justify-center text-center py-20 px-4 sm:px-6 lg:px-8',
+        mounted && 'animate-fade-in-up'
+      )}
+    >
+      <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
+        Empower Your Business
+      </h1>
+      <p className="mt-6 max-w-3xl text-lg text-gray-200">
+        A flexible, scalable solution built to help you grow. From insights to
+        automation, we bring everything you need under one roof.
+      </p>
 
-        {mounted && (
-          <Link to="/dashboard">
-            <Button
-              devId="hero-cta-button"
-              className="mt-8 bg-purple-600 hover:bg-purple-700 text-white font-medium"
-            >
-              <span className="flex items-center gap-2">
-                Get Started
-                <ArrowRight className="w-4 h-4" />
-              </span>
-            </Button>
-          </Link>
-        )}
-      </Div>
-    </Container>
+      <div className="mt-10 flex gap-4">
+        <Button
+          devId="hero-primary-cta"
+          className="bg-purple-600 hover:bg-purple-700 text-white"
+        >
+          Get Started
+        </Button>
+        <Button
+          devId="hero-secondary-cta"
+          variant="outline"
+          className="border-gray-300 text-gray-300 hover:bg-gray-800"
+        >
+          Learn More
+        </Button>
+      </div>
+
+      {/* Placeholder illustration */}
+      <div className="mt-12 w-full max-w-4xl">
+        <img
+          src="/images/hero-illustration.svg"
+          alt="Hero illustration"
+          className="w-full object-cover"
+        />
+      </div>
+    </section>
   );
 };
 
