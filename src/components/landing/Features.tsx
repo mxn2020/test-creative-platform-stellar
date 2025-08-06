@@ -1,57 +1,48 @@
 import React from 'react';
-import { Container, Div, H1, P } from '@/lib/dev-container';
+import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { CheckCircle, LightningBolt, Users, Calendar } from 'lucide-react';
 
-const features = [
-  {
-    icon: <CheckCircle className="h-8 w-8 text-purple-600" />,
-    title: 'Streamlined Workflow',
-    description: 'Automate repetitive tasks and focus on what matters most.',
-  },
-  {
-    icon: <LightningBolt className="h-8 w-8 text-purple-600" />,
-    title: 'Real‑Time Insights',
-    description: 'Analytics dashboards keep you informed at a glance.',
-  },
-  {
-    icon: <Users className="h-8 w-8 text-purple-600" />,
-    title: 'Client Management',
-    description: 'All your client data, communications, and history in one place.',
-  },
-  {
-    icon: <Calendar className="h-8 w-8 text-purple-600" />,
-    title: 'Appointment Scheduling',
-    description: 'Book, edit, and track appointments with ease.',
-  },
-];
+interface Feature {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+}
 
 export const Features: React.FC = () => {
+  const featureList: Feature[] = [
+    {
+      title: 'Analytics',
+      description: 'Deep insights with real‑time dashboards and custom reports.',
+      icon: <svg className="h-8 w-8 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 1016 0 8 8 0 10-16zM9 5h2v6l3 3-1.5 1.5L9 12V5z"/></svg>,
+    },
+    {
+      title: 'Automation',
+      description: 'Streamline workflows with powerful automation tools.',
+      icon: <svg className="h-8 w-8 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z"/></svg>,
+    },
+    {
+      title: 'Collaboration',
+      description: 'Team spaces, comments, and shared resources.',
+      icon: <svg className="h-8 w-8 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a5 5 0 00-5 5v1H4a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2V10a2 2 0 00-2-2h-1V7a5 5 0 00-5-5z"/></svg>,
+    },
+  ];
+
   return (
-    <Container componentId="landing-features">
-      <Div devId="features-wrapper" className="py-16 px-4 bg-white">
-        <H1 devId="features-title" className="text-3xl font-bold text-center text-gray-800">
-          Features
-        </H1>
-        <Div devId="features-grid" className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feat, idx) => (
-            <Div
-              key={idx}
-              devId={`feature-${idx}`}
-              className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-lg shadow-sm"
-            >
-              {feat.icon}
-              <H1 devId={`feature-title-${idx}`} className="mt-4 text-xl font-semibold text-gray-900">
-                {feat.title}
-              </H1>
-              <P devId={`feature-desc-${idx}`} className="mt-2 text-gray-600">
-                {feat.description}
-              </P>
-            </Div>
-          ))}
-        </Div>
-      </Div>
-    </Container>
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {featureList.map((feat) => (
+          <Card
+            key={feat.title}
+            devId={`feature-${feat.title.replace(/\s+/g, '-').toLowerCase()}`}
+            className="bg-white hover:shadow-lg transition-shadow p-6 text-center"
+          >
+            <div className="flex justify-center mb-4">{feat.icon}</div>
+            <h3 className="text-xl font-semibold text-gray-900">{feat.title}</h3>
+            <p className="mt-2 text-gray-600">{feat.description}</p>
+          </Card>
+        ))}
+      </div>
+    </section>
   );
 };
 
