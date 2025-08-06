@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Div } from '../lib/dev-container';
+import { Container, Div } from '@/lib/dev-container';
 import { LandingHeader } from '@/components/landing/LandingHeader';
-import { LandingHero } from '@/components/landing/Hero';
-import { LandingStats } from '@/components/landing/Stats';
-import { LandingFeatures } from '@/components/landing/Features';
-import { LandingTestimonials } from '@/components/landing/Testimonials';
-import { LandingCTA } from '@/components/landing/CTA';
-import { LandingFAQ } from '@/components/landing/FAQ';
+import { Hero } from '@/components/landing/Hero';
+import { Stats } from '@/components/landing/Stats';
+import { Features } from '@/components/landing/Features';
+import { Testimonials } from '@/components/landing/Testimonials';
+import { CTA } from '@/components/landing/CTA';
+import { FAQ } from '@/components/landing/FAQ';
 import { LandingFooter } from '@/components/landing/LandingFooter';
 
 export const Landing: React.FC = () => {
@@ -19,31 +19,31 @@ export const Landing: React.FC = () => {
   return (
     <Container componentId="landing-page-root">
       <Div
-        devId="main-wrapper"
-        devName="Main Wrapper"
-        devDescription="Main page wrapper with gradient background"
+        devId="landing-main-wrapper"
+        devName="Landing Main Wrapper"
+        devDescription="Full-screen wrapper with gradient background"
         className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
       >
         {/* Header */}
         <LandingHeader />
 
         {/* Hero Section */}
-        <LandingHero mounted={mounted} />
+        <Hero mounted={mounted} />
 
         {/* Stats Section */}
-        <LandingStats />
+        <Stats />
 
         {/* Features Section */}
-        <LandingFeatures />
+        <Features />
 
         {/* Testimonials Section */}
-        <LandingTestimonials />
+        <Testimonials />
 
-        {/* Call‑to‑Action Section */}
-        <LandingCTA />
+        {/* CTA Section */}
+        <CTA />
 
         {/* FAQ Section */}
-        <LandingFAQ />
+        <FAQ />
 
         {/* Footer */}
         <LandingFooter />
