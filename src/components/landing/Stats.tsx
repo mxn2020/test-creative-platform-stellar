@@ -1,32 +1,33 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Container, Div, H1, P } from '@/lib/dev-container';
 import { cn } from '@/lib/utils';
 
 const stats = [
-  { label: 'Active Users', value: '12,345' },
-  { label: 'Monthly Sessions', value: '98,765' },
-  { label: 'Tasks Processed', value: '1.2M' },
-  { label: 'Uptime', value: '99.99%' },
+  { label: 'Active Users', value: '1,245' },
+  { label: 'Monthly Sessions', value: '9,876' },
+  { label: 'Projects Managed', value: '342' },
+  { label: 'Support Tickets', value: '27' },
 ];
 
-export const LandingStats: React.FC = () => {
+export const Stats: React.FC = () => {
   return (
-    <section data-testid="landing-stats" className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-          Trusted by Thousands
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat) => (
-            <Card key={stat.label} className="text-center">
-              <CardHeader>
-                <CardTitle className="text-4xl font-semibold text-gray-900">{stat.value}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-gray-600">{stat.label}</CardContent>
-            </Card>
+    <Container componentId="landing-stats">
+      <Div devId="stats-section" className="py-12 bg-gray-100">
+        <Div className="max-w-4xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {stats.map((stat, idx) => (
+            <Div key={idx} devId={`stat-${idx}`} className="flex flex-col">
+              <H1 devId={`stat-value-${idx}`} className="text-3xl font-bold text-purple-600">
+                {stat.value}
+              </H1>
+              <P devId={`stat-label-${idx}`} className="mt-2 text-gray-600">
+                {stat.label}
+              </P>
+            </Div>
           ))}
-        </div>
-      </div>
-    </section>
+        </Div>
+      </Div>
+    </Container>
   );
 };
+
+export default Stats;
