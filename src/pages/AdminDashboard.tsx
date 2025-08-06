@@ -9,14 +9,11 @@ import { AdminLoadingState } from '@/components/admin/stats/AdminLoadingState';
 import { AdminErrorState } from '@/components/admin/stats/AdminErrorState';
 import { AdminClientsStats } from '@/components/admin/stats/AdminClientsStats';
 import { AdminAppointmentsStats } from '@/components/admin/stats/AdminAppointmentsStats';
-
 export const AdminDashboard: React.FC = () => {
   const { data: stats, isLoading, error } = useAdminDashboard();
-
   if (isLoading) {
     return <AdminLoadingState />;
   }
-
   if (error || !stats) {
     return (
       <AdminErrorState
@@ -24,7 +21,6 @@ export const AdminDashboard: React.FC = () => {
       />
     );
   }
-
   return (
     <Container componentId="admin-dashboard-page">
       <Div
@@ -42,23 +38,50 @@ export const AdminDashboard: React.FC = () => {
             Overview of system activity and user statistics
           </P>
         </Div>
-
         {/* Stats Cards */}
         <AdminStatsCards stats={stats} />
-
         {/* Quick Actions */}
         <AdminQuickActions />
-
         {/* New admin widgets */}
-        <AdminClientsStats clients={stats.clients} />
-        <AdminAppointmentsStats appointments={stats.appointments} />
-
+        <AdminClientsStats clients={(stats as any).clients} />
+        <AdminAppointmentsStats appointments={(stats as any).appointments} />
         {/* Recent Activity */}
         <AdminRecentActivity activities={stats.recentActivities} />
-
         {/* System Health */}
         <AdminSystemHealth systemHealth={stats.systemHealth} />
       </Div>
     </Container>
   );
 };
+---END:src/pages/AdminDashboard.tsx---
+---FILE:src/components/admin/stats/AdminClientsStats.tsx---
+import React from 'react';
+interface AdminClientsStatsProps {
+  clients: any;
+}
+export const AdminClientsStats: React.FC<AdminClientsStatsProps> = ({ clients }) => {
+  return (
+    <div className="p-4 bg-white rounded shadow">
+      <h3 className="text-lg font-semibold">Clients Statistics</h3>
+      <pre className="mt-2 text-sm whitespace-pre-wrap">{JSON.stringify(clients, null, 2)}</pre>
+    </div>
+  );
+};
+export default AdminClientsStats;
+---END:src/components/admin/stats/AdminClientsStats.tsx---
+---FILE:src/components/admin/stats/AdminAppointmentsStats.tsx---
+import React from 'react';
+interface AdminAppointmentsStatsProps {
+  appointments: any;
+}
+export const AdminAppointmentsStats: React.FC<AdminAppointmentsStatsProps> = ({ appointments }) => {
+  return (
+    <div className="p-4 bg-white rounded shadow">
+      <h3 className="text-lg font-semibold">Appointments Statistics</h3>
+      <pre className="mt-2 text-sm whitespace-pre-wrap">{JSON.stringify(appointments, null, 2)}</pre>
+    </div>
+  );
+};
+export default AdminAppointmentsStats;
+---END:src/components/admin/stats/AdminAppointmentsStats.tsx---
+---END---
