@@ -128,9 +128,9 @@ body.sidebar-open::-webkit-scrollbar {
 
 /* Ensure dev popover is always on top */
 .dev-popover-top-layer {
-  z-index: 2147483647 !important; /* Maximum z-index value */
+  z-index: 2147483647 !important;
   position: absolute !important;
-  isolation: isolate !important; /* Create new stacking context */
+  isolation: isolate !important;
 }
 
 /* Ensure popover content and dropdowns stay on top */
@@ -187,8 +187,7 @@ html {
   }
 }
 
-
-
+/* Base element styles */
 @layer base {
   * {
     @apply border-border;
