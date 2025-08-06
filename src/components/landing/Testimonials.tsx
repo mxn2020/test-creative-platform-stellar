@@ -1,14 +1,11 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
-
 interface Testimonial {
   name: string;
   role: string;
   quote: string;
   avatar: string;
 }
-
 export const Testimonials: React.FC = () => {
   const data: Testimonial[] = [
     {
@@ -30,14 +27,12 @@ export const Testimonials: React.FC = () => {
       avatar: '/images/avatars/liam.jpg',
     },
   ];
-
   return (
     <section className="bg-white py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         {data.map((t) => (
           <Card
             key={t.name}
-            devId={`testimonial-${t.name.replace(/\\s+/g, '-').toLowerCase()}`}
             className="p-6 flex flex-col items-center text-center"
           >
             <img
@@ -54,5 +49,4 @@ export const Testimonials: React.FC = () => {
     </section>
   );
 };
-
 export default Testimonials;
